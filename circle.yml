@@ -1,0 +1,20 @@
+machine:
+  timezone: Asia/Tokyo
+  ruby:
+    version: 2.1.5
+  services:
+    - docker
+
+dependencies:
+  cache_directories:
+    - "~/docker"
+  pre:
+    - docker info
+    - if [[ -e ~/docker/image.tar ]]; then docker load --input ~/docker/image.tar; fi
+    - docker build -t specinfra_test .
+    - mkdir -p ~/docker; docker save specinfra_test > ~/docker/image.tar
+
+test:
+  override:
+    - bundle exec rspec
+
