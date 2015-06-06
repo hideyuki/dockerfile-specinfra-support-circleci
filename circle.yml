@@ -8,8 +8,7 @@ machine:
 dependencies:
   cache_directories:
     - "~/docker"
-  pre:
-    - docker info
+  override:
     - if [[ -e ~/docker/image.tar ]]; then docker load --input ~/docker/image.tar; fi
     - docker build -t specinfra_test .
     - mkdir -p ~/docker; docker save specinfra_test > ~/docker/image.tar
