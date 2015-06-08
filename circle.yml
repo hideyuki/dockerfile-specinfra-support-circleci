@@ -18,6 +18,7 @@ dependencies:
 
 test:
   override:
+    - docker run -d --name specinfra_test specinfra_test
     - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' specinfra_test)" -- bash -c echo hello
 #    - docker run specinfra_test bundle install && bundle exec rspec
 #    - bundle exec rspec
