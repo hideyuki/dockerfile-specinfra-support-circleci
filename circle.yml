@@ -13,10 +13,11 @@ dependencies:
     - docker build -t specinfra_test .
     - mkdir -p ~/docker; docker save specinfra_test > ~/docker/image.tar
 
-  post:
-    - bundle update specinfra
+#  post:
+#    - bundle update specinfra
 
 test:
   override:
-    - bundle exec rspec
+    - docker run specinfra_test bundle install && bundle exec rspec
+#    - bundle exec rspec
 
