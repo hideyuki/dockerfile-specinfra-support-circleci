@@ -13,14 +13,14 @@ dependencies:
     - docker build -t specinfra_test .
     - mkdir -p ~/docker; docker save specinfra_test > ~/docker/image.tar
 
-#  post:
-#    - bundle update specinfra
+  post:
+    - bundle update specinfra
 
 test:
   override:
-    - docker run -d --name specinfra_test specinfra_test
-    - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' specinfra_test)" -- bash -c echo hello
+#    - docker run -d --name specinfra_test specinfra_test
+#    - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' specinfra_test)" -- bash -c echo hello
 #    - docker run specinfra_test bundle install && bundle exec rspec
-#    - bundle exec rspec
+    - bundle exec rspec
 
 
